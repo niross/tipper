@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+      target: dev
+    image: tipper_dev_app
+    container_name: tipper_dev
+    volumes:
+      - ./app:/tipper/app
+    env_file:
+      - ./.envs/dev.env
+    ports:
+      - "8000:80"
