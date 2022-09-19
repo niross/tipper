@@ -3,6 +3,7 @@ WORKDIR /tipper
 
 FROM base AS dev
 COPY requirements-dev.txt /tipper/requirements-dev.txt
+COPY alembic.ini /tipper/alembic.ini
 COPY ./compose/start-dev.sh /tipper/start-dev.sh
 RUN pip install --no-cache-dir -r /tipper/requirements-dev.txt
 CMD ["/tipper/start-dev.sh"]

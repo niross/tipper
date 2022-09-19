@@ -76,6 +76,7 @@ celerybeat.pid
 .envs/dev.env
 .envs/prod.env
 .venv
+.env
 
 # mypy
 .mypy_cache/
@@ -93,3 +94,6 @@ cython_debug/
 
 # PyCharm
 .idea/
+
+# sqlite dbs
+*.db

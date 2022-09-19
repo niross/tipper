@@ -4,3 +4,4 @@ pip-tools
 pytest
 pre-commit
 black
+python-dotenv
