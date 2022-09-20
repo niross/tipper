@@ -3,7 +3,7 @@ from datetime import datetime
 
 from sqlalchemy import Boolean, Column, DateTime, Integer, Numeric, String, Text
 
-from app.database import Base, UUID
+from app.database import Base
 
 
 class TipReport(Base):

@@ -9,3 +9,7 @@ db-migrate:
 .PHONY: up
 up:
 	docker-compose -f docker-compose-dev.yml up --build
+
+.PHONY: test
+test:
+	pytest .

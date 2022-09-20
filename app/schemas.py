@@ -20,3 +20,12 @@ class TipReport(BaseModel):
 
     class Config:
         orm_mode = True
+        schema_extra = {
+            "example": {
+                "latitude": 51.4620742,
+                "longitude": -0.1905076,
+                "number_of_items": 1,
+                "description": "A lot of rubbish",
+                "is_hazardous": True,
+            }
+        }
