@@ -21,5 +21,7 @@ def get_db():
 
 
 @app.post("/reports/", response_model=schemas.TipReport)
-def create_tip_report(tip_report: schemas.TipReport, db: Session = Depends(get_db)):
+async def create_tip_report(
+    tip_report: schemas.TipReport, db: Session = Depends(get_db)
+):
     return crud.create_tip_report(db=db, tip_report=tip_report)
