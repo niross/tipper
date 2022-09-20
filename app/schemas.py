@@ -5,10 +5,10 @@ from pydantic import BaseModel
 
 
 class TipReport(BaseModel):
-    id: int
+    id: Union[int, None] = None
     latitude: float
     longitude: float
-    number_of_items: int
+    number_of_items: Union[int, None] = None
     description: Union[str, None] = None
     is_hazardous: Union[bool, None] = None
     image: Union[str, None] = None

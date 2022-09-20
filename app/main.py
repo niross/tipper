@@ -20,6 +20,6 @@ def get_db():
         db.close()
 
 
-@app.get("/reports/", response_model=schemas.TipReport)
+@app.post("/reports/", response_model=schemas.TipReport)
 def create_tip_report(tip_report: schemas.TipReport, db: Session = Depends(get_db)):
     return crud.create_tip_report(db=db, tip_report=tip_report)
