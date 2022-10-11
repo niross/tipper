@@ -1,6 +1,5 @@
-from typing import Union
-
 from fastapi import Depends, FastAPI
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
@@ -8,10 +7,7 @@ from app.database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
 
-
-# Dependency
 def get_db():
     db = SessionLocal()
     try:
@@ -20,7 +16,13 @@ def get_db():
         db.close()
 
 
-@app.post("/reports/", response_model=schemas.TipReport)
+api_app = FastAPI(title="API")
+app = FastAPI(title="Main App")
+app.mount("/api", api_app)
+app.mount("/", StaticFiles(directory="app/frontend", html=True), name="frontend")
+
+
+@api_app.post("/reports/", response_model=schemas.TipReport)
 async def create_tip_report(
     tip_report: schemas.TipReport, db: Session = Depends(get_db)
 ):
