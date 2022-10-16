@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  app: &app
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+      target: staging
+    image: tipper_staging_app
+    container_name: tipper_staging
+    ports:
+      - 8880:80
+    env_file:
+      - ./.envs/staging.env
+    volumes:
+       - /usr/syno/etc/certificate:/certificate
+
