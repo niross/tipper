@@ -14,5 +14,6 @@ services:
     env_file:
       - ./.envs/staging.env
     volumes:
-       - /usr/syno/etc/certificate:/certificate
+      - ./app/staging.db:/tipper/app/staging.db
+      - /usr/syno/etc/certificate:/certificate
 
