@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  app: &app
+  app:
     build:
       context: .
       dockerfile: ./compose/Dockerfile

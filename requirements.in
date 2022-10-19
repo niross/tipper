@@ -4,3 +4,4 @@ sqlalchemy
 uvicorn
 alembic
 requests
+slack-sdk

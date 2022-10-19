@@ -39,7 +39,7 @@ client = TestClient(app)
 # TODO: Will need to be upgraded to async tests in the future
 def test_create_report(test_db):
     response = client.post(
-        "/reports/",
+        "/api/reports/",
         json={
             "latitude": 1.1,
             "longitude": -1.1,
