@@ -10,9 +10,16 @@
     <h1>Tipper test page.</h1>
     <h3>Click the button below to submit a tip report to the server</h3>
     <p id="message"></p>
-    <button id="create-report" type="submit">
-      Create tip report
-    </button>
+    <p>
+      <label for="image">Upload an image</label>
+      <br/>
+      <input id="image" type="file" />
+    </p>
+    <p>
+      <button id="create-report" type="submit">
+        Create tip report
+      </button>
+    </p>
 	<script>
     document.addEventListener("DOMContentLoaded", function(event) {
       var tipButton = document.getElementById("create-report");
@@ -22,19 +29,49 @@
         message.innerText = "";
         tipButton.setAttribute("disabled", "");
         tipButton.innerText = "Determining location...";
+
+        // DELETE ME
+        const form = new FormData()
+        form.append("latitude", 0);
+        form.append("longitude", 0);
+        form.append("image", document.getElementById("image").files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/api/reports/?latitude=0.1", true);
+        // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onreadystatechange = function() {
+          if (this.readyState === XMLHttpRequest.DONE) {
+            if (this.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              message.innerText = "Tip report with id " + response.id + " created successfully (" + response.latitude + ", " + response.longitude + ")";
+            }
+            else {
+              console.error("Call to the backend failed");
+              message.innerText = "Failed to create tip report";
+            }
+            tipButton.innerText = "Create another tip report";
+            tipButton.removeAttribute("disabled");
+          }
+        }
+        xhr.send(form);
+        return
+        // FIN
         if ("geolocation" in navigator) {
           navigator.geolocation.getCurrentPosition(function(position) {
             tipButton.innerText = "Position determined. Creating report..."
 
             console.log("Got position", position.coords.latitude, position.coords.longitude);
-            var reportContent = {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+            const form = new FormData()
+            form.append("latitude", position.coords.latitude);
+            form.append("longitude", position.coords.longitude);
+
+            if (document.getElementById("image").value !== "") {
+              console.log("Attaching a file to the request");
+              form.append("image", document.getElementById("image").files[0]);
             }
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/api/reports/", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
               if (this.readyState === XMLHttpRequest.DONE) {
                 if (this.status === 200) {
@@ -50,7 +87,7 @@
               }
             }
 
-            xhr.send(JSON.stringify(reportContent));
+            xhr.send(form);
           });
         }
         else {

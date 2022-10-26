@@ -10,6 +10,10 @@ db-migrate:
 up:
 	docker-compose -f docker-compose-dev.yml up --build
 
+.PHONY: build-test
+build-test:
+
 .PHONY: test
 test:
-	pytest .
+	docker-compose -f docker-compose-test.yml build
+	docker-compose -f docker-compose-test.yml run --rm app /bin/bash -c "pytest /tipper/"

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+      target: test
+    image: tipper_test_app
+    container_name: tipper_dev
+    env_file:
+      - ./.envs/test.env
