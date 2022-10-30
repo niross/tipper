@@ -1,5 +1,3 @@
-from typing import Union
-
 import sentry_sdk
 from fastapi import Depends, FastAPI, HTTPException, UploadFile
 from fastapi.staticfiles import StaticFiles

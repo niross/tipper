@@ -22,3 +22,4 @@ class TipReport(Base):
     reporter_last_name = Column(String, nullable=True)
     reporter_email = Column(String, nullable=True)
     reporter_phone = Column(String, nullable=True)
+    sent = Column(DateTime, nullable=True)
