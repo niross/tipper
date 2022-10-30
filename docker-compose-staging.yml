@@ -17,4 +17,4 @@ services:
     volumes:
       - ./app/staging.db:/tipper/app/staging.db
       - /usr/syno/etc/certificate:/certificate
-
+      - ./attachments:/tipper/attachments

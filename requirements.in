@@ -6,3 +6,4 @@ alembic
 requests
 slack-sdk
 sentry-sdk[fastapi]
+python-multipart
